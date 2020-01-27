@@ -12,7 +12,7 @@ function App() {
       </div>
       <div className="AddField">
         <div className="AddTask">
-          <input type="text" placeholder="I need a task..." />
+          <input type="text" placeholder="I need a task..." id ="addInput"/>
           <input type="button" value="Create" />
         </div>
       </div>
@@ -23,7 +23,7 @@ function App() {
           </div>
           <div className="TaskList">
             <div className="TaskComponent">
-              <div className="TaskLine">
+              <div className="TaskComponentLine">
                 <div className="TaskComponentCheck">
                   <input type="checkbox" value="" />
                 </div>
@@ -36,6 +36,8 @@ function App() {
                 </div>
               </div>
             </div>
+            
+            
             <div className="HideTask">
               Hide complete
             </div>

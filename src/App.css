@@ -1,38 +1,133 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+  display:flex;
+  width: 100%;
+  height:100vh;
   flex-direction: column;
-  align-items: center;
+  border: 1px solid red;
+  flex-grow: 1;
+}
+
+.Heading{
+  display:flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border: 1px solid black;
+  height:10%;
+} 
+
+.Title{
+  display: flex;
+  align-items: center;
+}
+
+.AddField{
+  display: flex;
+  justify-content: center;
+  border:1px solid red;
+  height: 10%;
+  width: 100%;
+}
+
+
+.AddTask  {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /*border: 3px dotted green;*/
+  align-items: center;
+  flex-direction: row;
+  width: 40%;
+}
+
+.AddTask   input{
+  padding: 20px;
+  font-size: 16pt;
+  display: flex;
+  border: 2px solid black;
+  align-items: center;
+}
+.AddTask   input[type=text]{
+  display: flex;
+  width: 70%;
+}
+.AddTask   input[type=button]:hover{
   color: white;
+  background-color: black;
 }
 
-.App-link {
-  color: #61dafb;
+.AddTask   input[type=text]:focus{
+  color: white;
+  background-color: black;
+  border: 3px solid grey;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.TaskWindow{
+  display: flex;
+  justify-content: center;
+  border: 1px solid purple; 
+  height: 80%;
 }
+
+
+.TaskView{
+  display: flex;
+  justify-content: center;
+  border: 3px dotted orange; 
+  flex-direction: column;
+  width: 80%;
+}
+
+.TaskTitle{
+  font-size: 16pt;
+  font-weight: bold;
+  border: 2px dotted blue;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.TaskComponent
+{
+  display: flex;
+  height:100%;
+  flex-direction: column;
+  border: 1px solid green;
+  overflow: scroll;
+}
+
+.TaskComponentLine{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.TaskComponentCheck{
+  display: flex;
+  width: 10%;
+  border: 1px solid blue;
+  justify-content: center;
+}
+.TaskComponentCheck input{
+ width: 40px;
+ height:40px;
+}
+
+.TaskComponentDescription{
+  display: flex;
+  width:80%;
+  justify-content: start;
+  border:1px solid red;
+  font:14pt;
+  align-items: center;
+}
+
+.TaskComponentButton
+{
+  display: flex;
+  flex-direction: row;
+}
+.HideTask{
+  display:flex;
+  align-items: flex-end;
+  border: 1px solid black;
+} 
