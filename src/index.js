@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import TaskComponent from './components/task-component/TaskComponent.js'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const defaultState = { taskList: [] };
+
+const rootReducer = (state = defaultState, action) => {
+    const newState = { ...state, taskList: [...state.taskList] };
+    switch (action.type) {
+        case 'addTask': let description = action.payload;
+            newState.taskList.push({ done: false, description });
+            return newState;
+        default: return state;
+    }
+}
+
+const store=createStore(rootReducer);
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//serviceWorker.unregister();
