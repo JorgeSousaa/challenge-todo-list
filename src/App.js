@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import AddTask from './components/add-task/AddTask.js'
+import TaskComponent from './components/task-component/TaskComponent.js'
 
 function App() {
   return (
@@ -20,20 +21,11 @@ function App() {
             Tasks
           </div>
           <div className="TaskList">
-            <div className="TaskComponent">
-              <div className="TaskComponentLine">
-                <div className="TaskComponentCheck">
-                  <input type="checkbox" value="" />
-                </div>
-                <div className="TaskComponentDescription">
-                  __________________________________________________
-                  </div>
-                <div className="TaskComponentButton">
-                  <input type="button" value="Edit" />
-                  <input type="button" value="Delete" />
-                </div>
-              </div>
-            </div>
+            <TaskComponent/>
+            <TaskComponent/>
+            <TaskComponent/>
+
+
           </div>
           <div className="HideTask">
             Hide complete
