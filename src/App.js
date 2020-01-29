@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AddTask from './components/add-task/AddTask.js'
 
 function App() {
   return (
@@ -11,10 +12,7 @@ function App() {
         </div>
       </div>
       <div className="AddField">
-        <div className="AddTask">
-          <input type="text" placeholder="I need a task..." id ="addInput"/>
-          <input type="button" value="Create" />
-        </div>
+        <AddTask/>
       </div>
       <div className="TaskWindow">
         <div className="TaskView">
@@ -36,11 +34,9 @@ function App() {
                 </div>
               </div>
             </div>
-            
-            
-            <div className="HideTask">
-              Hide complete
-            </div>
+          </div>
+          <div className="HideTask">
+            Hide complete
           </div>
         </div>
 
