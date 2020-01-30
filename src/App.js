@@ -16,6 +16,8 @@ class App extends React.PureComponent {
   addTask() {
     this.props.addTask();
   }
+  
+
 
   render() {
     return (
@@ -60,7 +62,8 @@ class App extends React.PureComponent {
     return {
       addTask: () => {
         dispatch({ type: "addTask" });
-      }
+      },
+
     }
   }
   export default connect(mapStateToProps, mapDispatchToProps)(App);

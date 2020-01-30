@@ -4,7 +4,6 @@
   width: 100%;
   height:100vh;
   flex-direction: column;
-  border: 1px solid red;
   flex-grow: 1;
 }
 
@@ -23,7 +22,6 @@
 .AddField{
   display: flex;
   justify-content: center;
-  border:1px solid red;
   height: 10%;
   width: 100%;
 }
@@ -64,7 +62,6 @@
 .TaskWindow{
   display: flex;
   justify-content: center;
-  border: 1px solid purple; 
   height: 80%;
 }
 
@@ -72,7 +69,6 @@
 .TaskView{
   display: flex;
   justify-content: center;
-  border: 3px dotted orange; 
   flex-direction: column;
   width: 80%;
 }
@@ -80,7 +76,6 @@
 .TaskTitle{
   font-size: 16pt;
   font-weight: bold;
-  border: 2px dotted blue;
   display: flex;
   justify-content: flex-start;
 }
@@ -90,7 +85,7 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .TaskComponent
@@ -98,7 +93,6 @@
   display: flex;
  
   flex-direction: column;
-  border: 1px solid green;
   justify-content: flex-start;
 }
 
@@ -107,12 +101,12 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  border-top: 1px solid black;
 }
 
 .TaskComponentCheck{
   display: flex;
   width: 10%;
-  border: 1px solid blue;
   justify-content: center;
 }
 .TaskComponentCheck input{
@@ -124,7 +118,6 @@
   display: flex;
   width:80%;
   justify-content: start;
-  border:1px solid red;
   font:14pt;
   align-items: center;
 }

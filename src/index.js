@@ -15,6 +15,9 @@ const rootReducer = (state = defaultState, action) => {
         case 'addTask': let description = action.payload;
             newState.taskList.push({ done: false, description });
             return newState;
+        case 'removeTask': newState.taskList.splice(action.payload,1);
+            return newState;
+        case 'editTask': return newState;
         default: return state;
     }
 }
