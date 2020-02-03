@@ -12,15 +12,18 @@ const defaultState = { taskList: [] };
 const rootReducer = (state = defaultState, action) => {
     const newState = { ...state, taskList: [...state.taskList] };
     switch (action.type) {
-        case 'addTask': let description = action.payload;
+        case 'addTask':
+            let description = action.payload;
             newState.taskList.push({ done: false, description });
             return newState;
-        case 'removeTask': newState.taskList.splice(action.payload, 1);
+        case 'removeTask':
+            newState.taskList.splice(action.payload, 1);
             return newState;
-        case 'saveTask': newState.taskList[action.payload.index] = action.payload.newDescription;
-        console.log(action.payload.index);
-        console.log(action.payload.newDescription);
-        console.log(newState.taskList);
+        case 'saveTask':
+            newState.taskList[action.payload.index].description = action.payload.newDescription;
+            return newState;
+        case 'setComplete':
+            newState.taskList[action.payload.index].done = action.payload.complete;
             return newState;
         default: return state;
     }

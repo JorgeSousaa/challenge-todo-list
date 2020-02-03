@@ -14,12 +14,18 @@ export class TaskComponent extends React.PureComponent {
         this.props.removeTask(this.props.index);
     }
     saveTask = () => {
-        this.props.saveTask({ index: this.props.index, newDescription: this.state.value })
+        this.props.saveTask({ index: this.props.index, newDescription: this.state.value})
+    }
+
+    setComplete=()=>
+    {
+        this.props.setComplete({ index: this.props.index, complete: !this.props.taskValue })
     }
 
     handleChange = (event) => {
         this.setState({ value: event.target.value });
     }
+
 
     renderDescription = () => {
         if (!this.state.editable) {
@@ -53,13 +59,14 @@ export class TaskComponent extends React.PureComponent {
             return "Save";
         }
     }
+
     render() {
 
         return (
             <div className="TaskComponent">
                 <div className="TaskComponentLine">
                     <div className="TaskComponentCheck">
-                        <input type="checkbox" value={this.props.taskValue} />
+                        <input type="checkbox" value={this.props.taskValue} onClick={this.setComplete}/>
                     </div>
                     <div className="TaskComponentDescription">
                         {
@@ -82,6 +89,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveTask: (payload) => {
             dispatch({ type: "saveTask", payload });
+        },
+        setComplete: (payload) => {
+            dispatch({ type: "setComplete", payload });
         }
 
     }
