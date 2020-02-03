@@ -4,6 +4,7 @@ import './App.css';
 import AddTask from './components/add-task/AddTask.js'
 import TaskComponent from './components/task-component/TaskComponent.js'
 import { connect } from 'react-redux';
+import { getVisibleTasks } from './selector/Selector.js'
 
 class App extends React.PureComponent {
 
@@ -16,8 +17,11 @@ class App extends React.PureComponent {
   addTask() {
     this.props.addTask();
   }
-  
 
+  checkIncomplete = () => {
+    console.log(this.props.completed)
+    this.props.checkIncomplete(!this.props.completed)
+  }
 
   render() {
     return (
@@ -37,14 +41,13 @@ class App extends React.PureComponent {
           </div>
             <div className="TaskList">
               {
-                this.props.taskList.map((value,index)=>
-                {
-                  return <TaskComponent taskValue={value.done} taskDescription={value.description} index={index}/>
+                this.props.taskList.map((value, index) => {
+                  return <TaskComponent taskValue={value.done} taskDescription={value.description} index={index} />
                 })
               }
             </div>
             <div className="HideTask">
-              Hide complete
+              <input type="checkbox" value={this.props.completed} onClick={this.checkIncomplete} />Hide complete
           </div>
           </div>
 
@@ -53,17 +56,21 @@ class App extends React.PureComponent {
     );
   }
 }
-  const mapStateToProps = state => {
-    return {
-      taskList: state.taskList,
-    }
+const mapStateToProps = state => {
+  return {
+    taskList: state.taskList,
+    completed: state.completed
   }
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      addTask: () => {
-        dispatch({ type: "addTask" });
-      },
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTask: () => {
+      dispatch({ type: "addTask" });
+    },
+    checkIncomplete: (payload) => {
+      dispatch({ type: "checkIncomplete", payload })
+    }
 
-    }
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(App);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

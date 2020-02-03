@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import TaskComponent from './components/task-component/TaskComponent.js'
 
-const defaultState = { taskList: [] };
+const defaultState = { taskList: [], completed: false };
 
 const rootReducer = (state = defaultState, action) => {
     const newState = { ...state, taskList: [...state.taskList] };
@@ -25,6 +25,9 @@ const rootReducer = (state = defaultState, action) => {
         case 'setComplete':
             newState.taskList[action.payload.index].done = action.payload.complete;
             return newState;
+        case 'checkIncomplete': 
+            newState.completed = action.payload;
+            return newState
         default: return state;
     }
 }
