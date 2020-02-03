@@ -15,14 +15,18 @@ const rootReducer = (state = defaultState, action) => {
         case 'addTask': let description = action.payload;
             newState.taskList.push({ done: false, description });
             return newState;
-        case 'removeTask': newState.taskList.splice(action.payload,1);
+        case 'removeTask': newState.taskList.splice(action.payload, 1);
             return newState;
-        case 'editTask': return newState;
+        case 'saveTask': newState.taskList[action.payload.index] = action.payload.newDescription;
+        console.log(action.payload.index);
+        console.log(action.payload.newDescription);
+        console.log(newState.taskList);
+            return newState;
         default: return state;
     }
 }
 
-const store=createStore(rootReducer);
+const store = createStore(rootReducer);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

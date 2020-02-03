@@ -7,10 +7,9 @@
   flex-grow: 1;
 }
 
-.Heading{
+.Header{
   display:flex;
   justify-content: center;
-  border: 1px solid black;
   height:10%;
 } 
 
@@ -117,9 +116,13 @@
 .TaskComponentDescription{
   display: flex;
   width:80%;
-  justify-content: start;
+  justify-content: flex-start;
   font:14pt;
   align-items: center;
+}
+
+.TaskComponentDescription p{
+  margin: 0;
 }
 
 .TaskComponentButton
