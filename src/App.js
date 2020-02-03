@@ -4,7 +4,8 @@ import './App.css';
 import AddTask from './components/add-task/AddTask.js'
 import TaskComponent from './components/task-component/TaskComponent.js'
 import { connect } from 'react-redux';
-import { getVisibleTasks } from './selector/Selector.js'
+import { getTasks } from './selector/Selector.js'
+import { getCompletedFilter } from './selector/Selector.js'
 
 class App extends React.PureComponent {
 
@@ -19,8 +20,8 @@ class App extends React.PureComponent {
   }
 
   checkIncomplete = () => {
-    console.log(this.props.completed)
-    this.props.checkIncomplete(!this.props.completed)
+    console.log(this.props.completedFilter)
+    this.props.checkIncomplete(!this.props.completedFilter)
   }
 
   render() {
@@ -47,7 +48,7 @@ class App extends React.PureComponent {
               }
             </div>
             <div className="HideTask">
-              <input type="checkbox" value={this.props.completed} onClick={this.checkIncomplete} />Hide complete
+              <input type="checkbox" value={this.props.completedFilter} onClick={this.checkIncomplete} />Hide complete
           </div>
           </div>
 
@@ -58,8 +59,8 @@ class App extends React.PureComponent {
 }
 const mapStateToProps = state => {
   return {
-    taskList: state.taskList,
-    completed: state.completed
+    taskList: getTasks(state),
+    completedFilter: getCompletedFilter(state)
   }
 }
 const mapDispatchToProps = (dispatch) => {

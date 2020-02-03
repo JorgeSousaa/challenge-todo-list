@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect'
 
 
-const getTasks = (state) => state.taskList
-const getVisibilityFilter = (state)=> state.visibilityFilter  
+const getAllTasks = (state) => state.taskList
+export const getCompletedFilter = (state)=> state.completedFilter
 
-export const getVisibleTasks = createSelector(
-    [getVisibilityFilter,getTasks],(visibilityFilter,taskList)=>{
-        switch(visibilityFilter){
-            case 'showAll': return taskList;
-            case 'showIncomplete': return taskList.filter(task=>!task.done)
-        }
+export const getTasks = createSelector(
+    [getCompletedFilter,getAllTasks],(completedFilter,taskList)=>{
+       if(completedFilter){
+            return taskList.filter(task=>!task.done)
+       }
+       return taskList;
     }
 )
  
