@@ -42,13 +42,13 @@ class App extends React.PureComponent {
           </div>
             <div className="TaskList">
               {
-                this.props.taskList.map((value, index) => {
-                  return <TaskComponent taskValue={value.done} taskDescription={value.description} index={index} />
+                this.props.taskList.map((value) => {
+                  return <TaskComponent key={value.id} taskValue={value.done} taskDescription={value.description} id={value.id} />
                 })
               }
             </div>
             <div className="HideTask">
-              <input type="checkbox" value={this.props.completedFilter} onClick={this.checkIncomplete} />Hide complete
+              <input type="checkbox" value={this.props.completedFilter} onClick={this.checkIncomplete} defaultChecked={this.props.completedFilter} />Hide complete
           </div>
           </div>
 

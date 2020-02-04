@@ -11,15 +11,15 @@ export class TaskComponent extends React.PureComponent {
     }
 
     removeTask = () => {
-        this.props.removeTask(this.props.index);
+        this.props.removeTask({id:this.props.id});
     }
     saveTask = () => {
-        this.props.saveTask({ index: this.props.index, newDescription: this.state.value})
+        this.props.saveTask({ id: this.props.id, newDescription: this.state.value})
     }
 
     setComplete=()=>
     {
-        this.props.setComplete({ index: this.props.index, complete: !this.props.taskValue })
+        this.props.setComplete({ id: this.props.id, complete: !this.props.taskValue })
     }
 
     handleChange = (event) => {
@@ -66,7 +66,7 @@ export class TaskComponent extends React.PureComponent {
             <div className="TaskComponent">
                 <div className="TaskComponentLine">
                     <div className="TaskComponentCheck">
-                        <input type="checkbox" value={this.props.taskValue} onClick={this.setComplete}/>
+                        <input type="checkbox" value={this.props.taskValue} onClick={this.setComplete} defaultChecked={this.props.taskValue}/>
                     </div>
                     <div className="TaskComponentDescription">
                         {

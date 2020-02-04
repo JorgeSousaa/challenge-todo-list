@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import TaskComponent from './components/task-component/TaskComponent.js'
 
+const uuidv4 = require('uuid/v4');
+
 const defaultState = { taskList: [], completedFilter: false };
 
 const rootReducer = (state = defaultState, action) => {
@@ -14,18 +16,30 @@ const rootReducer = (state = defaultState, action) => {
     switch (action.type) {
         case 'addTask':
             let description = action.payload;
-            newState.taskList.push({ done: false, description });
+            newState.taskList.push({ done: false, description, id: uuidv4() });
             return newState;
         case 'removeTask':
-            newState.taskList.splice(action.payload, 1);
+            newState.taskList.forEach((element, index) => {
+                if (element.id == action.payload.id) {
+                    newState.taskList.splice(index, 1);
+                }
+            });
             return newState;
         case 'saveTask':
-            newState.taskList[action.payload.index].description = action.payload.newDescription;
+            newState.taskList.forEach((element, index) => {
+                if (element.id == action.payload.id) {
+                    element.description = action.payload.newDescription
+                }
+            })
             return newState;
         case 'setComplete':
-            newState.taskList[action.payload.index].done = action.payload.complete;
+            newState.taskList.forEach((element, index) => {
+                if (element.id == action.payload.id) {
+                    element.done = action.payload.complete
+                }
+            })
             return newState;
-        case 'checkIncomplete': 
+        case 'checkIncomplete':
             newState.completedFilter = action.payload;
             return newState
         default: return state;
