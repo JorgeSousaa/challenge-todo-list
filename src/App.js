@@ -6,22 +6,17 @@ import TaskComponent from './components/task-component/TaskComponent.js'
 import { connect } from 'react-redux';
 import { getTasks } from './selector/Selector.js'
 import { getCompletedFilter } from './selector/Selector.js'
+import { getSortedTasks } from './selector/Selector.js'
+import { getSorter } from './selector/Selector.js'
 
 class App extends React.PureComponent {
 
-  constructor(props) {
-
-    super(props);
-
-  }
-
-  addTask() {
-    this.props.addTask();
-  }
-
   checkIncomplete = () => {
-    console.log(this.props.completedFilter)
     this.props.checkIncomplete(!this.props.completedFilter)
+  }
+
+  sortList=()=>{ 
+    this.props.sortList();
   }
 
   render() {
@@ -38,7 +33,7 @@ class App extends React.PureComponent {
         <div className="TaskWindow">
           <div className="TaskView">
             <div className="TaskTitle">
-              Tasks
+              <input type="button" value="Tasks" onClick={this.sortList} />
           </div>
             <div className="TaskList">
               {
@@ -59,17 +54,19 @@ class App extends React.PureComponent {
 }
 const mapStateToProps = state => {
   return {
-    taskList: getTasks(state),
-    completedFilter: getCompletedFilter(state)
+    taskList: getSortedTasks(state),
+    completedFilter: getCompletedFilter(state),
+    sorter: getSorter(state)
+
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTask: () => {
-      dispatch({ type: "addTask" });
-    },
     checkIncomplete: (payload) => {
       dispatch({ type: "checkIncomplete", payload })
+    },
+    sortList: ()=>{
+      dispatch({type:"sortList"})
     }
 
   }

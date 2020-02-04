@@ -9,7 +9,7 @@ import TaskComponent from './components/task-component/TaskComponent.js'
 
 const uuidv4 = require('uuid/v4');
 
-const defaultState = { taskList: [], completedFilter: false };
+const defaultState = { taskList: [], completedFilter: false, sorter: "default" };
 
 const rootReducer = (state = defaultState, action) => {
     const newState = { ...state, taskList: [...state.taskList] };
@@ -41,7 +41,25 @@ const rootReducer = (state = defaultState, action) => {
             return newState;
         case 'checkIncomplete':
             newState.completedFilter = action.payload;
-            return newState
+            return newState;
+
+        case 'sortList':
+
+            if (newState.sorter == "aToZ") {
+                newState.sorter = "zToA";
+                return newState;
+            }
+            if (newState.sorter  == "zToA") {
+                newState.sorter = "default";
+                return newState;
+            }
+            if (newState.sorter  == "default") {
+                newState.sorter = "aToZ";
+                return newState;
+            }
+            newState.sorter = "default";
+            return newState;
+
         default: return state;
     }
 }
