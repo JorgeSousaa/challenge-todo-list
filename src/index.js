@@ -4,8 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware} from 'redux';
 import TaskComponent from './components/task-component/TaskComponent.js'
+import * as storage from 'redux-storage'
+import createEngine from 'redux-storage-engine-localstorage';
+
+const engine = createEngine('my-save-key');
+const middleware = storage.createMiddleware(engine);
+const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
 
 const uuidv4 = require('uuid/v4');
 
@@ -64,7 +70,10 @@ const rootReducer = (state = defaultState, action) => {
     }
 }
 
-const store = createStore(rootReducer);
+const store = createStoreWithMiddleware(rootReducer);
+
+const load = storage.createLoader(engine);
+load(store).then((value) => console.log(store));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
