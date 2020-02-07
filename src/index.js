@@ -67,21 +67,6 @@ const rootReducer = (state = defaultState, action) => {
             }
             return newState;
 
-            //  if (newState.sorter === sorterOrder.az) {
-            //      newState.sorter = sorterOrder.za;
-            //      return newState;
-            //  }
-            //  if (newState.sorter  === sorterOrder.za) {
-            //      newState.sorter = sorterOrder.creationDate;
-            //      return newState;
-            //  }
-            //  if (newState.sorter  === sorterOrder.creationDate) {
-            //      newState.sorter = sorterOrder.az;
-            //      return newState;
-            //  }
-            //  newState.sorter = sorterOrder.creationDate;
-            // return newState;
-
         default: return state;
     }
 };

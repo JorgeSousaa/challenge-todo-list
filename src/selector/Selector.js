@@ -3,7 +3,6 @@ import {sorterOrder} from "../actions/Actions";
 
 
 const getAllTasks = (state) => {
-    console.log(state.taskList);
     return state.taskList.map(item =>{return {...item}});
 
 };
