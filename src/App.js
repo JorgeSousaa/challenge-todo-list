@@ -8,16 +8,17 @@ import { getTasks } from './selector/Selector.js'
 import { getCompletedFilter } from './selector/Selector.js'
 import { getSortedTasks } from './selector/Selector.js'
 import { getSorter } from './selector/Selector.js'
+import {checkIncomplete, sortList} from "./actions/Actions";
 
 class App extends React.PureComponent {
 
   checkIncomplete = () => {
     this.props.checkIncomplete(!this.props.completedFilter)
-  }
+  };
 
   sortList=()=>{ 
     this.props.sortList();
-  }
+  };
 
   render() {
     return (
@@ -46,29 +47,29 @@ class App extends React.PureComponent {
               <input type="checkbox" value={this.props.completedFilter} onClick={this.checkIncomplete} defaultChecked={this.props.completedFilter} />Hide complete
           </div>
           </div>
-
         </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     taskList: getSortedTasks(state),
     completedFilter: getCompletedFilter(state),
     sorter: getSorter(state)
-
   }
-}
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     checkIncomplete: (payload) => {
-      dispatch({ type: "checkIncomplete", payload })
+     dispatch(checkIncomplete(payload))
     },
     sortList: ()=>{
-      dispatch({type:"sortList"})
+      dispatch(sortList())
     }
-
   }
-}
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -8,6 +8,8 @@ import { createStore, applyMiddleware} from 'redux';
 import TaskComponent from './components/task-component/TaskComponent.js'
 import * as storage from 'redux-storage'
 import createEngine from 'redux-storage-engine-localstorage';
+import {actionTypes} from './actions/Actions.js'
+import {sorterOrder} from "./actions/Actions";
 
 const engine = createEngine('my-save-key');
 const middleware = storage.createMiddleware(engine);
@@ -15,60 +17,74 @@ const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
 
 const uuidv4 = require('uuid/v4');
 
-const defaultState = { taskList: [], completedFilter: false, sorter: "default" };
+const defaultState = { taskList: [], completedFilter: false, sorter: sorterOrder.creationDate };
+
 
 const rootReducer = (state = defaultState, action) => {
     const newState = { ...state, taskList: [...state.taskList] };
     switch (action.type) {
-        case 'addTask':
+        case actionTypes.addTask:
             let description = action.payload;
             newState.taskList.push({ done: false, description, id: uuidv4() });
             return newState;
-        case 'removeTask':
+        case actionTypes.removeTask:
             newState.taskList.forEach((element, index) => {
-                if (element.id == action.payload.id) {
+                if (element.id === action.payload.id) {
                     newState.taskList.splice(index, 1);
                 }
             });
             return newState;
-        case 'saveTask':
+        case actionTypes.saveTask:
             newState.taskList.forEach((element, index) => {
-                if (element.id == action.payload.id) {
+                if (element.id === action.payload.id) {
                     element.description = action.payload.newDescription
                 }
-            })
+            });
             return newState;
-        case 'setComplete':
+        case actionTypes.setComplete:
             newState.taskList.forEach((element, index) => {
-                if (element.id == action.payload.id) {
+                if (element.id === action.payload.id) {
                     element.done = action.payload.complete
                 }
-            })
+            });
             return newState;
-        case 'checkIncomplete':
-            newState.completedFilter = action.payload;
+        case actionTypes.checkIncomplete:
+            newState.completedFilter = action.completedFilter;
             return newState;
 
-        case 'sortList':
+        case actionTypes.sortList:
+            switch(newState.sorter){
+                case sorterOrder.az:
+                    newState.sorter = sorterOrder.za;break;
 
-            if (newState.sorter == "aToZ") {
-                newState.sorter = "zToA";
-                return newState;
+                case sorterOrder.za:
+                    newState.sorter = sorterOrder.creationDate;break;
+
+                case sorterOrder.creationDate:
+                    newState.sorter = sorterOrder.az;break;
+
+                default: newState.sorter=sorterOrder.creationDate;break;
             }
-            if (newState.sorter  == "zToA") {
-                newState.sorter = "default";
-                return newState;
-            }
-            if (newState.sorter  == "default") {
-                newState.sorter = "aToZ";
-                return newState;
-            }
-            newState.sorter = "default";
             return newState;
+
+            //  if (newState.sorter === sorterOrder.az) {
+            //      newState.sorter = sorterOrder.za;
+            //      return newState;
+            //  }
+            //  if (newState.sorter  === sorterOrder.za) {
+            //      newState.sorter = sorterOrder.creationDate;
+            //      return newState;
+            //  }
+            //  if (newState.sorter  === sorterOrder.creationDate) {
+            //      newState.sorter = sorterOrder.az;
+            //      return newState;
+            //  }
+            //  newState.sorter = sorterOrder.creationDate;
+            // return newState;
 
         default: return state;
     }
-}
+};
 
 const store = createStoreWithMiddleware(rootReducer);
 
@@ -80,4 +96,4 @@ ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementB
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-//serviceWorker.unregister();
+serviceWorker.unregister();

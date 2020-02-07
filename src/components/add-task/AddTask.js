@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {addTask} from "../../actions/Actions";
 
 
 export class AddTask extends React.PureComponent {
@@ -30,7 +31,7 @@ export class AddTask extends React.PureComponent {
 const mapDispatchToProps = (dispatch) => {
     return {
       addTask: (payload) => {
-        dispatch({ type: "addTask",payload });
+        dispatch(addTask());
       }
     }
   }

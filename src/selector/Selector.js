@@ -1,8 +1,13 @@
 import { createSelector } from 'reselect'
+import {sorterOrder} from "../actions/Actions";
 
 
-const getAllTasks = (state) => state.taskList
-export const getCompletedFilter = (state) => state.completedFilter
+const getAllTasks = (state) => {
+    console.log(state.taskList);
+    return state.taskList.map(item =>{return {...item}});
+
+};
+export const getCompletedFilter = (state) => state.completedFilter;
 
 export const getTasks = createSelector(
     [getCompletedFilter, getAllTasks], (completedFilter, taskList) => {
@@ -11,19 +16,19 @@ export const getTasks = createSelector(
         }
         return taskList;
     }
-)
-export const getSorter = (state) => state.sorter
+);
+export const getSorter = (state) => state.sorter;
 
 export const getSortedTasks = createSelector(
-    [getSorter, getTasks], (sorter, taskList) => {
+    [getSorter, getTasks], (sorter, taskList,tasklist2) => {
         switch (sorter) {
-            case "default":
-                             
+            case sorterOrder.creationDate:
                 return taskList;
-            case "aToZ": 
+            case sorterOrder.az:
                 return taskList.sort((a, b) => a.description.localeCompare(b.description));
-            case "zToA":
+            case sorterOrder.za:
                 return taskList.sort((a, b) => b.description.localeCompare(a.description));
+            default: return  taskList;
         }
     }
-)
+);

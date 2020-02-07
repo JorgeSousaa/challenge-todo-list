@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {removeTask, saveTask, setComplete} from "../../actions/Actions";
 
 export class TaskComponent extends React.PureComponent {
     constructor(props) {
@@ -85,13 +86,13 @@ export class TaskComponent extends React.PureComponent {
 const mapDispatchToProps = (dispatch) => {
     return {
         removeTask: (payload) => {
-            dispatch({ type: "removeTask", payload });
+            dispatch(removeTask(payload));
         },
         saveTask: (payload) => {
-            dispatch({ type: "saveTask", payload });
+            dispatch(saveTask(payload));
         },
         setComplete: (payload) => {
-            dispatch({ type: "setComplete", payload });
+            dispatch(setComplete(payload));
         }
 
     }
