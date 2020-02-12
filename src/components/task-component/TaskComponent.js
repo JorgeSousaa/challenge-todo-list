@@ -13,19 +13,19 @@ export class TaskComponent extends React.PureComponent {
 
     removeTask = () => {
         this.props.removeTask({id:this.props.id});
-    }
+    };
     saveTask = () => {
         this.props.saveTask({ id: this.props.id, newDescription: this.state.value})
-    }
+    };
 
     setComplete=()=>
     {
         this.props.setComplete({ id: this.props.id, complete: !this.props.taskValue })
-    }
+    };
 
     handleChange = (event) => {
         this.setState({ value: event.target.value });
-    }
+    };
 
 
     renderDescription = () => {
@@ -36,22 +36,21 @@ export class TaskComponent extends React.PureComponent {
             return description;
         }
         else {
-
-            let description = <input type="text" value={this.state.value} onChange={this.handleChange} />
+            let description = <input type="text" value={this.state.value} onChange={this.handleChange} />;
             return description;
         }
     };
 
     makeEditable = () => {
-        if(this.state.editable==false){
+        if(this.state.editable===false){
             this.setState({ editable: true })
         }
-        if(this.state.editable==true)
+        if(this.state.editable===true)
         {
-            this.setState({ editable: false })
+            this.setState({ editable: false });
             this.saveTask();
         }
-    }
+    };
 
     getButtonValue=()=>{
         if(!this.state.editable){
@@ -59,7 +58,7 @@ export class TaskComponent extends React.PureComponent {
         }else{
             return "Save";
         }
-    }
+    };
 
     render() {
 
@@ -96,5 +95,5 @@ const mapDispatchToProps = (dispatch) => {
         }
 
     }
-}
+};
 export default connect(null, mapDispatchToProps)(TaskComponent);

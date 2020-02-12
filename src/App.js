@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import AddTask from './components/add-task/AddTask.js'
 import TaskComponent from './components/task-component/TaskComponent.js'
 import { connect } from 'react-redux';
-import { getTasks } from './selector/Selector.js'
 import { getCompletedFilter } from './selector/Selector.js'
 import { getSortedTasks } from './selector/Selector.js'
 import { getSorter } from './selector/Selector.js'

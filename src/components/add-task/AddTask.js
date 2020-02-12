@@ -14,10 +14,10 @@ export class AddTask extends React.PureComponent {
     addTask = ()=> {
         this.props.addTask(this.state.value);
     
-    }
+    };
     handleChange = (event) => {
         this.setState({value: event.target.value});
-    }
+    };
 
     render() {
         return (
@@ -31,8 +31,8 @@ export class AddTask extends React.PureComponent {
 const mapDispatchToProps = (dispatch) => {
     return {
       addTask: (payload) => {
-        dispatch(addTask());
+        dispatch( addTask(payload));
       }
     }
-  }
+  };
 export default connect(null,mapDispatchToProps)(AddTask);

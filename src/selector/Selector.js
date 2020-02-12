@@ -3,10 +3,10 @@ import {sorterOrder} from "../actions/Actions";
 
 
 const getAllTasks = (state) => {
-    return state.taskList.map(item =>{return {...item}});
+    return state.taskState.taskList.map(item =>{return {...item}});
 
 };
-export const getCompletedFilter = (state) => state.completedFilter;
+export const getCompletedFilter = (state) => state.incompleteState.completedFilter;
 
 export const getTasks = createSelector(
     [getCompletedFilter, getAllTasks], (completedFilter, taskList) => {
@@ -16,7 +16,8 @@ export const getTasks = createSelector(
         return taskList;
     }
 );
-export const getSorter = (state) => state.sorter;
+
+export const getSorter = (state) => state.sortState.sorter;
 
 export const getSortedTasks = createSelector(
     [getSorter, getTasks], (sorter, taskList,tasklist2) => {
